@@ -81,7 +81,7 @@ int variable=0;
 
 
 /* Line 189 of yacc.c  */
-#line 85 "y.tab.c"
+#line 85 "benson.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -114,40 +114,20 @@ int variable=0;
      ESCRIBIR = 261,
      PARENIZQUIERDO = 262,
      PARENDERECHO = 263,
-     PUNTOYCOMA = 264,
+     PYCOMA = 264,
      COMA = 265,
      ASIGNACION = 266,
      SUMA = 267,
      RESTA = 268,
      FDT = 269,
      ERRORLEXICO = 270,
-     PRODUCTO = 271,
+     MULTIPLICACION = 271,
      COCIENTE = 272,
      MODULO_O_RESTO = 273,
      ID = 274,
      CONSTANTE = 275
    };
 #endif
-/* Tokens.  */
-#define INICIO 258
-#define FIN 259
-#define LEER 260
-#define ESCRIBIR 261
-#define PARENIZQUIERDO 262
-#define PARENDERECHO 263
-#define PUNTOYCOMA 264
-#define COMA 265
-#define ASIGNACION 266
-#define SUMA 267
-#define RESTA 268
-#define FDT 269
-#define ERRORLEXICO 270
-#define PRODUCTO 271
-#define COCIENTE 272
-#define MODULO_O_RESTO 273
-#define ID 274
-#define CONSTANTE 275
-
 
 
 
@@ -164,7 +144,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 168 "y.tab.c"
+#line 148 "benson.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -176,7 +156,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 180 "y.tab.c"
+#line 160 "benson.tab.c"
 
 #ifdef short
 # undef short
@@ -480,8 +460,8 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "INICIO", "FIN", "LEER", "ESCRIBIR",
-  "PARENIZQUIERDO", "PARENDERECHO", "PUNTOYCOMA", "COMA", "ASIGNACION",
-  "SUMA", "RESTA", "FDT", "ERRORLEXICO", "PRODUCTO", "COCIENTE",
+  "PARENIZQUIERDO", "PARENDERECHO", "PYCOMA", "COMA", "ASIGNACION", "SUMA",
+  "RESTA", "FDT", "ERRORLEXICO", "MULTIPLICACION", "COCIENTE",
   "MODULO_O_RESTO", "ID", "CONSTANTE", "$accept", "programa",
   "listaDeSentencias", "sentencia", "$@1", "listaDeIDs",
   "listaDeExpresiones", "expresion", "primaria", "operadorAditivo",
@@ -1400,20 +1380,20 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 24 "benson.y"
-    {if(yyleng>4) yyerror("sintactico, debido a que supero el limite de 32 bits");}
+    {if(yyleng>4) yyerror("sintactico, debido a que supero el limite de 32 bits");;}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
 #line 39 "benson.y"
-    {printf("\n Se detecto el valor: %d \n",atoi(yytext)); }
+    {printf("valores %d \n",atoi(yytext)); ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1417 "y.tab.c"
+#line 1397 "benson.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1629,9 +1609,10 @@ yyreturn:
 
 int main() {
 yyparse();
+return 0;
 }
 void yyerror (char *s){
-printf("\n Se ha producido un error de tipo %s\n",s);
+printf("Se ha producido un error de tipo %s\n",s);
 }
 int yywrap()  {
  return 1;

@@ -12,7 +12,7 @@ int variable=0;
   char* cadena;
   int num;
 }
-%token INICIO FIN LEER ESCRIBIR PARENIZQUIERDO PARENDERECHO PYCOMA COMA ASIGNACION SUMA RESTA FDT ERRORLEXICO MULTIPLICACION COCIENTE MODULO_O_RESTO
+%token INICIO FIN LEER ESCRIBIR PARENIZQUIERDO PARENDERECHO PUNTOYCOMA COMA ASIGNACION SUMA RESTA FDT ERRORLEXICO PRODUCTO COCIENTE MODULO_O_RESTO
 %token <cadena> ID
 %token <num> CONSTANTE
 %%
@@ -21,9 +21,9 @@ programa: INICIO listaDeSentencias FIN
 listaDeSentencias: listaDeSentencias sentencia
 |sentencia
 ;
-sentencia: ID {if(yyleng>4) yyerror("semantico, debido a que supero el limite de 32 bits");} ASIGNACION expresion PYCOMA
-| LEER PARENIZQUIERDO listaDeIDs PARENDERECHO PYCOMA
-| ESCRIBIR PARENIZQUIERDO listaDeExpresiones PARENDERECHO PYCOMA
+sentencia: ID {if(yyleng>4) yyerror("sintactico, debido a que supero el limite de 32 bits");} ASIGNACION expresion PUNTOYCOMA
+| LEER PARENIZQUIERDO listaDeIDs PARENDERECHO PUNTOYCOMA
+| ESCRIBIR PARENIZQUIERDO listaDeExpresiones PARENDERECHO PUNTOYCOMA
 ;
 listaDeIDs: listaDeIDs COMA ID
 |ID
@@ -36,13 +36,13 @@ expresion: primaria
 |expresion operadorMultiplicativo primaria
 ;
 primaria: ID
-|CONSTANTE {printf("valores %d \n",atoi(yytext)); }
+|CONSTANTE {printf("\n Se detecto el valor: %d \n",atoi(yytext)); }
 |PARENIZQUIERDO expresion PARENDERECHO
 ;
 operadorAditivo: SUMA
 |RESTA
 ;
-operadorMultiplicativo: MULTIPLICACION
+operadorMultiplicativo: PRODUCTO
 |COCIENTE
 |MODULO_O_RESTO
 ;
@@ -51,7 +51,7 @@ int main() {
 yyparse();
 }
 void yyerror (char *s){
-printf("Se ha producido un error de tipo %s\n",s);
+printf("\n Se ha producido un error de tipo %s\n",s);
 }
 int yywrap()  {
  return 1;

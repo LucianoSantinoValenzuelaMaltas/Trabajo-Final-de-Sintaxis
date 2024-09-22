@@ -45,14 +45,14 @@
      ESCRIBIR = 261,
      PARENIZQUIERDO = 262,
      PARENDERECHO = 263,
-     PYCOMA = 264,
+     PUNTOYCOMA = 264,
      COMA = 265,
      ASIGNACION = 266,
      SUMA = 267,
      RESTA = 268,
      FDT = 269,
      ERRORLEXICO = 270,
-     MULTIPLICACION = 271,
+     PRODUCTO = 271,
      COCIENTE = 272,
      MODULO_O_RESTO = 273,
      ID = 274,
@@ -66,14 +66,14 @@
 #define ESCRIBIR 261
 #define PARENIZQUIERDO 262
 #define PARENDERECHO 263
-#define PYCOMA 264
+#define PUNTOYCOMA 264
 #define COMA 265
 #define ASIGNACION 266
 #define SUMA 267
 #define RESTA 268
 #define FDT 269
 #define ERRORLEXICO 270
-#define MULTIPLICACION 271
+#define PRODUCTO 271
 #define COCIENTE 272
 #define MODULO_O_RESTO 273
 #define ID 274
