@@ -1,7 +1,10 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
+#define TAMNOM 20+1
+extern FILE* yyin;
 extern char *yytext;
 extern int yyleng;
 extern int yylex(void);
@@ -47,8 +50,38 @@ operadorMultiplicativo: PRODUCTO
 |MODULO_O_RESTO
 ;
 %%
-int main() {
-yyparse();
+int main(int argc, char** argv) {
+  char nomArchi[TAMNOM];
+   if ( argc == 1 ){
+      printf("Debe ingresar el nombre del archivo fuente (en lenguaje Micro) en la linea de comandos\n");
+      return -1;
+   }
+   else if ( argc != 2 ){
+      printf("Numero incorrecto de argumentos\n");
+      return -1;
+   }
+   strcpy(nomArchi, argv[1]);
+   int largo_nomArchi = strlen(nomArchi);
+
+   if (largo_nomArchi > TAMNOM ){
+        printf("Nombre incorrecto del Archivo Fuente\n");    
+        return -1;
+    }
+    if (nomArchi[largo_nomArchi-1] != 'm' || nomArchi[largo_nomArchi-2] != '.' ){
+        printf("Nombre incorrecto del Archivo Fuente\n");
+        return -1;
+    }
+
+    yyin = fopen(nomArchi, "r");
+    if (yyin == NULL ){
+        printf("No se pudo abrir archivo fuente\n");
+        return -1;
+    }
+
+  yyparse();
+
+   return 0;
+   fclose(yyin);
 }
 void yyerror (char *s){
 printf("\n Se ha producido un error de tipo %s\n",s);
