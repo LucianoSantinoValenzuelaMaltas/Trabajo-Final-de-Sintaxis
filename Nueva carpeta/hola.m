@@ -1,4 +1,5 @@
 INICIO
-LEER (a,b,c);
-ESCRIBIR (a/b, d-h);
+a:=2;
+b:=1;
+c:=(a+b);
 FIN
