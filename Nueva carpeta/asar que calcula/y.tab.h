@@ -48,15 +48,15 @@
      PUNTOYCOMA = 264,
      COMA = 265,
      ASIGNACION = 266,
-     SUMA = 267,
-     RESTA = 268,
-     FDT = 269,
-     ERRORLEXICO = 270,
-     PRODUCTO = 271,
-     COCIENTE = 272,
+     FDT = 267,
+     ERRORLEXICO = 268,
+     ID = 269,
+     CONSTANTE = 270,
+     RESTA = 271,
+     SUMA = 272,
      MODULO_O_RESTO = 273,
-     ID = 274,
-     CONSTANTE = 275
+     COCIENTE = 274,
+     PRODUCTO = 275
    };
 #endif
 /* Tokens.  */
@@ -69,15 +69,15 @@
 #define PUNTOYCOMA 264
 #define COMA 265
 #define ASIGNACION 266
-#define SUMA 267
-#define RESTA 268
-#define FDT 269
-#define ERRORLEXICO 270
-#define PRODUCTO 271
-#define COCIENTE 272
+#define FDT 267
+#define ERRORLEXICO 268
+#define ID 269
+#define CONSTANTE 270
+#define RESTA 271
+#define SUMA 272
 #define MODULO_O_RESTO 273
-#define ID 274
-#define CONSTANTE 275
+#define COCIENTE 274
+#define PRODUCTO 275
 
 
 

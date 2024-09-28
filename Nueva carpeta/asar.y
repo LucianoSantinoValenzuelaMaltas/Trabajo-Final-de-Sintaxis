@@ -15,12 +15,9 @@ int variable=0;
   char* cadena;
   int num;
 }
-%token INICIO FIN LEER ESCRIBIR PARENIZQUIERDO PARENDERECHO PUNTOYCOMA COMA ASIGNACION FDT ERRORLEXICO
+%token INICIO FIN LEER ESCRIBIR PARENIZQUIERDO PARENDERECHO PUNTOYCOMA COMA ASIGNACION SUMA RESTA FDT ERRORLEXICO PRODUCTO COCIENTE MODULO_O_RESTO
 %token <cadena> ID
 %token <num> CONSTANTE
-%type <num> expresion
-%left SUMA RESTA
-%left PRODUCTO COCIENTE MODULO_O_RESTO
 %%
 programa: INICIO listaDeSentencias FIN
 ;
@@ -37,19 +34,20 @@ listaDeIDs: listaDeIDs COMA ID
 listaDeExpresiones: listaDeExpresiones COMA expresion
 |expresion
 ;
-expresion: CONSTANTE                        {$$ = $1; printf("\n Resultado: %d",$$);}
-|ID                                         {$$ = $1; printf("\n Resultado: %d",$$);}
-|expresion SUMA expresion                   {$$ = $1 + $3; printf("\n Resultado: %d",$$);}
-|expresion SUMA expresion                   {$$ = $1 + $3; printf("\n Resultado: %d",$$);}
-|expresion RESTA expresion                  {$$ = $1 - $3; printf("\n Resultado: %d",$$);}
-|expresion RESTA expresion                  {$$ = $1 - $3; printf("\n Resultado: %d",$$);}
-|expresion PRODUCTO expresion               {$$ = $1 * $3; printf("\n Resultado: %d",$$);}
-|expresion PRODUCTO expresion               {$$ = $1 * $3; printf("\n Resultado: %d",$$);}
-|expresion COCIENTE expresion               {$$ = $1 / $3; printf("\n Resultado: %d",$$);}
-|expresion COCIENTE expresion               {$$ = $1 / $3; printf("\n Resultado: %d",$$);}
-|expresion MODULO_O_RESTO expresion         {$$ = $1 % $3; printf("\n Resultado: %d",$$);}
-|expresion MODULO_O_RESTO expresion         {$$ = $1 % $3; printf("\n Resultado: %d",$$);}
-|PARENIZQUIERDO expresion PARENDERECHO      {$$ = $2; printf("\n Resultado: %d",$$);} 
+expresion: primaria
+|expresion operadorAditivo primaria
+|expresion operadorMultiplicativo primaria
+;
+primaria: ID
+|CONSTANTE {printf("Se detecto el valor: %d \n",atoi(yytext)); }
+|PARENIZQUIERDO expresion PARENDERECHO
+;
+operadorAditivo: SUMA
+|RESTA
+;
+operadorMultiplicativo: PRODUCTO
+|COCIENTE
+|MODULO_O_RESTO
 ;
 %%
 int main(int argc, char** argv) {

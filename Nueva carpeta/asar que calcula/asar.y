@@ -15,16 +15,19 @@ int variable=0;
   char* cadena;
   int num;
 }
-%token INICIO FIN LEER ESCRIBIR PARENIZQUIERDO PARENDERECHO PUNTOYCOMA COMA ASIGNACION SUMA RESTA FDT ERRORLEXICO PRODUCTO COCIENTE MODULO_O_RESTO
+%token INICIO FIN LEER ESCRIBIR PARENIZQUIERDO PARENDERECHO PUNTOYCOMA COMA ASIGNACION FDT ERRORLEXICO
 %token <cadena> ID
 %token <num> CONSTANTE
+%type <num> expresion primaria
+%left SUMA RESTA
+%left PRODUCTO COCIENTE MODULO_O_RESTO
 %%
 programa: INICIO listaDeSentencias FIN
 ;
 listaDeSentencias: listaDeSentencias sentencia
 |sentencia
 ;
-sentencia: ID {if(yyleng>4) yyerror("sintactico, debido a que supero el limite de 32 bits");} ASIGNACION expresion PUNTOYCOMA
+sentencia: ID ASIGNACION expresion PUNTOYCOMA
 | LEER PARENIZQUIERDO listaDeIDs PARENDERECHO PUNTOYCOMA
 | ESCRIBIR PARENIZQUIERDO listaDeExpresiones PARENDERECHO PUNTOYCOMA
 ;
@@ -34,20 +37,15 @@ listaDeIDs: listaDeIDs COMA ID
 listaDeExpresiones: listaDeExpresiones COMA expresion
 |expresion
 ;
-expresion: primaria
-|expresion operadorAditivo primaria
-|expresion operadorMultiplicativo primaria
+expresion: primaria                        {$$ = $1;}
+|expresion SUMA primaria                   {$$ = $1 + $3; printf("El Resultado de realizar la SUMA entre %d y %d es: %d \n",$1,$3,$$);}
+|expresion RESTA primaria                  {$$ = $1 - $3; printf("El Resultado de realizar la RESTA entre %d y %d es: %d \n",$1,$3,$$);}
+|expresion PRODUCTO primaria               {$$ = $1 * $3; printf("El Resultado del PRODUCTO entre %d y %d es: %d \n",$1,$3,$$);}
+|expresion COCIENTE primaria               {$$ = $1 / $3; printf("El Resultado del COCIENTE entre %d y %d es: %d \n",$1,$3,$$);}
+|expresion MODULO_O_RESTO primaria         {$$ = $1 % $3; printf("El RESTO de dividir %d entre %d es: %d \n",$1,$3,$$);}
 ;
-primaria: ID
-|CONSTANTE {printf("\n Se detecto el valor: %d \n",atoi(yytext)); }
-|PARENIZQUIERDO expresion PARENDERECHO
-;
-operadorAditivo: SUMA
-|RESTA
-;
-operadorMultiplicativo: PRODUCTO
-|COCIENTE
-|MODULO_O_RESTO
+primaria: CONSTANTE                        {$$ = $1; printf("Valor detectado: %d\n",$$);}
+|PARENIZQUIERDO expresion PARENDERECHO     {$$ = $2;}
 ;
 %%
 int main(int argc, char** argv) {
