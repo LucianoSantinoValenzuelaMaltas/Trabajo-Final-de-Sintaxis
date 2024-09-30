@@ -2,14 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #define TAMNOM 20+1
 extern FILE* yyin;
 extern char *yytext;
 extern int yyleng;
 extern int yylex(void);
 extern void yyerror(char*);
-int variable=0;
 %}
 %union{
   char* cadena;
