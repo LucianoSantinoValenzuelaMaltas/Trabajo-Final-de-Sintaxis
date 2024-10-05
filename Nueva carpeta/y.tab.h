@@ -50,13 +50,11 @@
      ASIGNACION = 266,
      SUMA = 267,
      RESTA = 268,
-     FDT = 269,
-     ERRORLEXICO = 270,
-     PRODUCTO = 271,
-     COCIENTE = 272,
-     MODULO_O_RESTO = 273,
-     ID = 274,
-     CONSTANTE = 275
+     PRODUCTO = 269,
+     COCIENTE = 270,
+     MODULO_O_RESTO = 271,
+     ID = 272,
+     CONSTANTE = 273
    };
 #endif
 /* Tokens.  */
@@ -71,13 +69,11 @@
 #define ASIGNACION 266
 #define SUMA 267
 #define RESTA 268
-#define FDT 269
-#define ERRORLEXICO 270
-#define PRODUCTO 271
-#define COCIENTE 272
-#define MODULO_O_RESTO 273
-#define ID 274
-#define CONSTANTE 275
+#define PRODUCTO 269
+#define COCIENTE 270
+#define MODULO_O_RESTO 271
+#define ID 272
+#define CONSTANTE 273
 
 
 
@@ -95,7 +91,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 99 "y.tab.h"
+#line 95 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
