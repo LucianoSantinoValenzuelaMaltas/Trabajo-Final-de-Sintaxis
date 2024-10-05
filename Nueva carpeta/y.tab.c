@@ -73,18 +73,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #define TAMNOM 20+1
 extern FILE* yyin;
 extern char *yytext;
 extern int yyleng;
 extern int yylex(void);
 extern void yyerror(char*);
-int variable=0;
 
 
 /* Line 189 of yacc.c  */
-#line 88 "y.tab.c"
+#line 86 "y.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -159,7 +157,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 14 "asar.y"
+#line 12 "asar.y"
 
   char* cadena;
   int num;
@@ -167,7 +165,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 171 "y.tab.c"
+#line 169 "y.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -179,7 +177,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 183 "y.tab.c"
+#line 181 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -471,9 +469,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    22,    22,    24,    25,    27,    27,    28,    29,    31,
-      32,    34,    35,    37,    38,    39,    41,    42,    43,    45,
-      46,    48,    49,    50
+       0,    20,    20,    22,    23,    25,    25,    26,    27,    29,
+      30,    32,    33,    35,    36,    37,    39,    40,    41,    43,
+      44,    46,    47,    48
 };
 #endif
 
@@ -1402,21 +1400,21 @@ yyreduce:
         case 5:
 
 /* Line 1455 of yacc.c  */
-#line 27 "asar.y"
+#line 25 "asar.y"
     {if(yyleng>4) yyerror("sintactico, debido a que supero el limite de 32 bits");}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 42 "asar.y"
+#line 40 "asar.y"
     {printf("Se detecto el valor: %d \n",atoi(yytext)); }
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1420 "y.tab.c"
+#line 1418 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1628,7 +1626,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 52 "asar.y"
+#line 50 "asar.y"
 
 int main(int argc, char** argv) {
   char nomArchi[TAMNOM];
@@ -1648,20 +1646,20 @@ int main(int argc, char** argv) {
         return -1;
     }
     if (nomArchi[largo_nomArchi-1] != 'm' || nomArchi[largo_nomArchi-2] != '.' ){
-        printf("Nombre incorrecto del Archivo Fuente\n");
+        printf("Formatpo incorrecto del Archivo Fuente\n");
         return -1;
     }
 
     yyin = fopen(nomArchi, "r");
     if (yyin == NULL ){
-        printf("No se pudo abrir archivo fuente\n");
+        printf("No se pudo abrir el archivo fuente\n");
         return -1;
     }
 
   yyparse();
 
+  fclose(yyin);
    return 0;
-   fclose(yyin);
 }
 void yyerror (char *s){
 printf("\n Se ha producido un error de tipo %s\n",s);

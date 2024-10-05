@@ -66,20 +66,20 @@ int main(int argc, char** argv) {
         return -1;
     }
     if (nomArchi[largo_nomArchi-1] != 'm' || nomArchi[largo_nomArchi-2] != '.' ){
-        printf("Nombre incorrecto del Archivo Fuente\n");
+        printf("Formato incorrecto del Archivo Fuente\n");
         return -1;
     }
 
     yyin = fopen(nomArchi, "r");
     if (yyin == NULL ){
-        printf("No se pudo abrir archivo fuente\n");
+        printf("No se pudo abrir el archivo fuente\n");
         return -1;
     }
 
   yyparse();
 
-   return 0;
-   fclose(yyin);
+  fclose(yyin);
+  return 0;
 }
 void yyerror (char *s){
 printf("\n Se ha producido un error de tipo %s\n",s);
