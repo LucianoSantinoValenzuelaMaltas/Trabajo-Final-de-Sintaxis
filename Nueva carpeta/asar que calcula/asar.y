@@ -15,7 +15,7 @@ int variable=0;
   char* cadena;
   int num;
 }
-%token INICIO FIN LEER ESCRIBIR PARENIZQUIERDO PARENDERECHO PUNTOYCOMA COMA ASIGNACION FDT ERRORLEXICO
+%token INICIO FIN LEER ESCRIBIR PARENIZQUIERDO PARENDERECHO PUNTOYCOMA COMA ASIGNACION
 %token <cadena> ID
 %token <num> CONSTANTE
 %type <num> expresion primaria
@@ -38,11 +38,11 @@ listaDeExpresiones: listaDeExpresiones COMA expresion
 |expresion
 ;
 expresion: primaria                        {$$ = $1;}
-|expresion SUMA primaria                   {$$ = $1 + $3; printf("El Resultado de realizar la SUMA entre %d y %d es: %d \n",$1,$3,$$);}
-|expresion RESTA primaria                  {$$ = $1 - $3; printf("El Resultado de realizar la RESTA entre %d y %d es: %d \n",$1,$3,$$);}
-|expresion PRODUCTO primaria               {$$ = $1 * $3; printf("El Resultado del PRODUCTO entre %d y %d es: %d \n",$1,$3,$$);}
-|expresion COCIENTE primaria               {$$ = $1 / $3; printf("El Resultado del COCIENTE entre %d y %d es: %d \n",$1,$3,$$);}
-|expresion MODULO_O_RESTO primaria         {$$ = $1 % $3; printf("El RESTO de dividir %d entre %d es: %d \n",$1,$3,$$);}
+|expresion SUMA expresion                   {$$ = $1 + $3; printf("El Resultado de realizar la SUMA entre %d y %d es: %d \n",$1,$3,$$);}
+|expresion RESTA expresion                  {$$ = $1 - $3; printf("El Resultado de realizar la RESTA entre %d y %d es: %d \n",$1,$3,$$);}
+|expresion PRODUCTO expresion               {$$ = $1 * $3; printf("El Resultado del PRODUCTO entre %d y %d es: %d \n",$1,$3,$$);}
+|expresion COCIENTE expresion               {$$ = $1 / $3; printf("El Resultado del COCIENTE entre %d y %d es: %d \n",$1,$3,$$);}
+|expresion MODULO_O_RESTO expresion         {$$ = $1 % $3; printf("El RESTO de dividir %d entre %d es: %d \n",$1,$3,$$);}
 ;
 primaria: CONSTANTE                        {$$ = $1; printf("Valor detectado: %d\n",$$);}
 |PARENIZQUIERDO expresion PARENDERECHO     {$$ = $2;}
